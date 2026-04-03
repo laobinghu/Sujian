@@ -75,6 +75,14 @@ const isMobileMenuOpen = ref(false)
         <UColorModeButton />
 
         <FontSwitcher />
+
+        <UButton
+          icon="i-lucide-menu"
+          variant="ghost"
+          color="neutral"
+          class="md:hidden"
+          aria-label="菜单"
+        />
       </template>
     </UHeader>
 
@@ -83,6 +91,16 @@ const isMobileMenuOpen = ref(false)
       v-model:open="isMobileMenuOpen"
       title="导航菜单"
     >
+      <template #default>
+        <UButton
+          icon="i-lucide-menu"
+          variant="ghost"
+          color="neutral"
+          class="md:hidden"
+          aria-label="菜单"
+        />
+      </template>
+
       <template #body>
         <nav class="mobile-nav">
           <NuxtLink
