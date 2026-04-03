@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css' }
+        { rel: 'stylesheet', href: 'https://cdn.jsdmirror.cn/npm/lxgw-wenkai-webfont@1.1.0/style.css' }
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' },
@@ -42,10 +42,18 @@ export default defineNuxtConfig({
     }
   },
 
+  experimental: {
+    inlineRouteRules: true
+  },
+
   compatibilityDate: '2025-01-15',
 
   // Vite 配置
   vite: {
+    optimizeDeps: {
+      include: [
+        '@mx-space/api-client'
+      ] },
     logLevel: 'error',
     build: {
       chunkSizeWarningLimit: 1000,

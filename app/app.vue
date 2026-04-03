@@ -62,7 +62,7 @@ const isMobileMenuOpen = ref(false)
 </script>
 
 <template>
-  <UApp :locale="locales[locale.value as keyof typeof locales] || locales['zh_cn']">
+  <UApp :locale="locales[locale as keyof typeof locales] || locales['zh_cn']">
     <UHeader>
       <template #left>
         <NuxtLink to="/">
@@ -99,7 +99,10 @@ const isMobileMenuOpen = ref(false)
     </UHeader>
 
     <!-- 移动端菜单抽屉 -->
-    <USlideover v-model:open="isMobileMenuOpen" title="导航菜单">
+    <USlideover
+      v-model:open="isMobileMenuOpen"
+      title="导航菜单"
+    >
       <template #body>
         <UVerticalNavigation :items="navItems" />
       </template>

@@ -67,7 +67,11 @@ const menuItems = computed(() => [
 </script>
 
 <template>
-  <UDropdownMenu v-model:open="isOpen" :items="menuItems" :modal="false">
+  <UDropdownMenu
+    v-model:open="isOpen"
+    :items="menuItems"
+    :modal="false"
+  >
     <UButton
       :aria-label="`当前字体: ${currentLabel}，点击切换`"
       icon="i-lucide-type"

@@ -63,18 +63,18 @@ const articlesData: Article[] = [
 const articlesByYear = computed(() => {
   const grouped: Record<string, Article[]> = {}
   articlesData.forEach((article) => {
-    const year = article.date.split('-')[0]
+    const year = article.date.split('-')[0] as string
     if (!grouped[year]) {
       grouped[year] = []
     }
-    grouped[year].push(article)
+    grouped[year]!.push(article)
   })
 
   const sorted: Record<string, Article[]> = {}
   Object.keys(grouped)
     .sort((a, b) => Number(b) - Number(a))
     .forEach((key) => {
-      sorted[key] = grouped[key].sort((a, b) =>
+      sorted[key] = grouped[key]!.sort((a, b) =>
         new Date(b.date).getTime() - new Date(a.date).getTime()
       )
     })

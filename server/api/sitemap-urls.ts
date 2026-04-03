@@ -17,7 +17,7 @@ export default defineEventHandler(async () => {
     })
 
     const itemRegex = /<item>[\s\S]*?<link>([\s\S]*?)<\/link>[\s\S]*?<\/item>/g
-    const lastmodRegex = /<pubDate>([\s\S]*?)<\/pubDate>/g
+    const _lastmodRegex = /<pubDate>([\s\S]*?)<\/pubDate>/g
 
     let itemMatch
     while ((itemMatch = itemRegex.exec(response)) !== null) {
