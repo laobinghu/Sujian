@@ -6,9 +6,9 @@
 
 /* 素笺设计系统 - 基础 CSS 变量 */
 :root {
-  /* 字体 */
-  --font-sans: 'Noto Sans SC', sans-serif;
-  --font-serif: 'Noto Serif SC', serif;
+  /* 字体 - 简阅：系统黑体 / 雅阅：霞鹜文楷 */
+  --font-sans: system-ui, sans-serif;
+  --font-serif: 'LXGW WenKai', 'Noto Serif SC', serif;
 
   /* 素笺色彩 - 亮色模式 */
   --sujian-paper-base: #f7f4ed;
@@ -118,6 +118,10 @@ html.dark {
 }
 
 /* 全局样式 */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 body {
   background-color: var(--sujian-paper-base);
   color: var(--sujian-ink-primary);
@@ -126,14 +130,24 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* 字体模式切换 */
+/* 明暗模式切换平滑过渡 */
+*,
+*::before,
+*::after {
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* 字体模式切换 - 应用到 body */
+body.font-serif,
 .font-serif {
   font-family: var(--font-serif);
 }
 
-/* 颗粒感滤镜 */
-.sujian-noise {
-  filter: url(#sujian-noise);
+body.font-sans,
+.font-sans {
+  font-family: var(--font-sans);
 }
 
 /* 信笺横格线 */

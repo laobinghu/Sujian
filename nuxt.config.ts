@@ -15,13 +15,26 @@ export default defineNuxtConfig({
     enabled: true
   },
 
+  // 页面过渡动画
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css' }
+      ]
+    },
+    pageTransition: { name: 'page', mode: 'out-in' },
+    layoutTransition: { name: 'layout', mode: 'out-in' }
+  },
+
   css: ['~/assets/css/main.css'],
   site: { url: 'blog-dev.laobinghu.top' },
 
   // Nuxt UI 主题配置
   ui: {
     theme: {
-      transitions: false,
+      transitions: true,
       defaultVariants: {
         color: 'neutral',
         size: 'md'

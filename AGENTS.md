@@ -126,6 +126,6 @@ app/
 ## Important Notes
 
 1. Chinese-inspired **Sujian** (素笺) design system — follow `PLAN.md`
-2. Font switching via `localStorage` key `sujian-font-pref`
+2. Font: 霞鹜文楷 (LxgwWenkai) + 系统黑体 fallback，via `localStorage` key `sujian-font-pref`
 3. Performance target: Lighthouse Performance > 90
 4. ESLint config: stylistic with `commaDangle: 'never'`, `braceStyle: '1tbs'`

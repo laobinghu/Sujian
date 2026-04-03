@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import * as locales from '@nuxt/ui/locale'
 
 const { locale } = useI18n()
 
-// 确保在客户端才访问 locale.value
 const lang = computed(() => {
   const loc = locales[locale.value as keyof typeof locales]
   return loc?.code || 'zh-CN'
@@ -46,29 +45,23 @@ useSeoMeta({
   twitterImage: '/og-image.jpg',
   twitterCard: 'summary_large_image'
 })
+
+const navItems = [
+  { label: '首页', to: '/' },
+  { label: '文章', to: '/posts' },
+  { label: '日记', to: '/notes' },
+  { label: '友链', to: '/friends' },
+  { label: '项目', to: '/projects' },
+  { label: '动态', to: '/recently' },
+  { label: '时间线', to: '/timeline' },
+  { label: '一言', to: '/says' },
+  { label: '站点地图', to: '/sitemap' }
+]
+
+const isMobileMenuOpen = ref(false)
 </script>
 
 <template>
-  <!-- SVG 噪点滤镜定义 -->
-  <svg
-    width="0"
-    height="0"
-    style="position: absolute;"
-  >
-    <filter id="sujian-noise">
-      <feTurbulence
-        type="fractalNoise"
-        baseFrequency="0.65"
-        numOctaves="3"
-        stitchTiles="stitch"
-      />
-      <feColorMatrix
-        type="saturate"
-        values="0"
-      />
-    </filter>
-  </svg>
-
   <UApp :locale="locales[locale.value as keyof typeof locales] || locales['zh_cn']">
     <UHeader>
       <template #left>
@@ -82,8 +75,17 @@ useSeoMeta({
       <template #right>
         <UColorModeButton />
 
-        <!-- 字体切换器 -->
         <FontSwitcher />
+
+        <!-- 移动端菜单按钮 -->
+        <UButton
+          icon="i-lucide-menu"
+          variant="ghost"
+          color="neutral"
+          class="md:hidden"
+          aria-label="菜单"
+          @click="isMobileMenuOpen = true"
+        />
 
         <UButton
           to="https://github.com/mx-space/core"
@@ -96,14 +98,16 @@ useSeoMeta({
       </template>
     </UHeader>
 
-    <UMain>
-      <!-- 全局背景颗粒感 -->
-      <div class="sujian-noise-bg">
-        <NuxtPage />
-      </div>
-    </UMain>
+    <!-- 移动端菜单抽屉 -->
+    <USlideover v-model:open="isMobileMenuOpen" title="导航菜单">
+      <template #body>
+        <UVerticalNavigation :items="navItems" />
+      </template>
+    </USlideover>
 
-    <USeparator icon="i-simple-icons-nuxtdotjs" />
+    <UMain>
+      <NuxtPage />
+    </UMain>
 
     <UFooter>
       <template #left>
@@ -126,17 +130,29 @@ useSeoMeta({
   </UApp>
 </template>
 
-<style scoped>
-.sujian-noise-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--sujian-paper-base);
-  filter: url(#sujian-noise);
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: -1;
+<style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.25s;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.2s;
+}
+
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
 }
 </style>

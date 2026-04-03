@@ -50,33 +50,9 @@ export default {
   overflow: hidden;
 }
 
-/* 使用伪元素为背景添加噪点，不影响内容 */
-.sujian-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  filter: url(#sujian-noise);
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.sujian-card > * {
-  position: relative;
-  z-index: 1;
-}
-
 .sujian-card.is-hovered {
   box-shadow: var(--sujian-shadow-md);
   transform: translateY(-2px);
-}
-
-.sujian-card.is-hovered::before {
-  opacity: 0.06;
 }
 
 /* 四角窗棂纹装饰 */

@@ -1,38 +1,13 @@
 <script setup lang="ts">
-// 导航菜单项
 const menuItems = [
-  {
-    label: '首页',
-    to: '/'
-  },
-  {
-    label: '文章',
-    to: '/posts'
-  },
-  {
-    label: '日记',
-    to: '/notes'
-  },
-  {
-    label: '友链',
-    to: '/friends'
-  },
-  {
-    label: '项目',
-    to: '/projects'
-  },
-  {
-    label: '动态',
-    to: '/recently'
-  },
-  {
-    label: '时间线',
-    to: '/timeline'
-  },
-  {
-    label: '一言',
-    to: '/says'
-  }
+  { label: '首页', to: '/' },
+  { label: '文章', to: '/posts' },
+  { label: '日记', to: '/notes' },
+  { label: '友链', to: '/friends' },
+  { label: '项目', to: '/projects' },
+  { label: '动态', to: '/recently' },
+  { label: '时间线', to: '/timeline' },
+  { label: '一言', to: '/says' }
 ]
 </script>
 
@@ -92,5 +67,11 @@ const menuItems = [
 
 .nav-link.router-link-active::after {
   transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+  .sujian-nav {
+    display: none;
+  }
 }
 </style>
