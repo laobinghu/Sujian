@@ -55,7 +55,6 @@ const navItems = [
   { label: '动态', to: '/recently' },
   { label: '时间线', to: '/timeline' },
   { label: '一言', to: '/says' },
-  { label: '站点地图', to: '/sitemap' }
 ]
 
 const isMobileMenuOpen = ref(false)
@@ -76,25 +75,6 @@ const isMobileMenuOpen = ref(false)
         <UColorModeButton />
 
         <FontSwitcher />
-
-        <!-- 移动端菜单按钮 -->
-        <UButton
-          icon="i-lucide-menu"
-          variant="ghost"
-          color="neutral"
-          class="md:hidden"
-          aria-label="菜单"
-          @click="isMobileMenuOpen = true"
-        />
-
-        <UButton
-          to="https://github.com/mx-space/core"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
       </template>
     </UHeader>
 
