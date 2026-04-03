@@ -1,18 +1,165 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@theme static {
-  --font-sans: 'Public Sans', sans-serif;
+/* 启用基于 class 的暗色模式 */
+@custom-variant dark (&:where(.dark, .dark *));
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+/* 素笺设计系统 - 基础 CSS 变量 */
+:root {
+  /* 字体 */
+  --font-sans: 'Noto Sans SC', sans-serif;
+  --font-serif: 'Noto Serif SC', serif;
+
+  /* 素笺色彩 - 亮色模式 */
+  --sujian-paper-base: #f7f4ed;
+  --sujian-paper-light: #faf8f3;
+  --sujian-paper-dark: #e8e4db;
+
+  --sujian-ink-primary: #2c2c2c;
+  --sujian-ink-secondary: #5a5a5a;
+  --sujian-ink-tertiary: #8c8c8c;
+
+  --sujian-cinnabar: #c9372e;
+  --sujian-cinnabar-light: #e05a52;
+  --sujian-cyan: #4a7c7e;
+
+  --sujian-shadow-sm: 0 1px 3px rgba(44,44,44,0.04), 0 1px 2px rgba(44,44,44,0.06);
+  --sujian-shadow-md: 0 4px 12px rgba(44,44,44,0.06), 0 2px 4px rgba(44,44,44,0.04);
+  --sujian-shadow-lg: 0 12px 24px rgba(44,44,44,0.08), 0 4px 8px rgba(44,44,44,0.04);
+
+  /* 信笺线 - 亮色 */
+  --sujian-line-color: rgba(44, 44, 44, 0.08);
+
+  /* 映射到 Reka UI / Nuxt UI 主题变量 */
+  --background: var(--sujian-paper-base);
+  --foreground: var(--sujian-ink-primary);
+
+  --card: var(--sujian-paper-light);
+  --card-foreground: var(--sujian-ink-primary);
+
+  --popover: var(--sujian-paper-light);
+  --popover-foreground: var(--sujian-ink-primary);
+
+  --primary: var(--sujian-cinnabar);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--sujian-paper-dark);
+  --secondary-foreground: var(--sujian-ink-primary);
+
+  --muted: var(--sujian-paper-dark);
+  --muted-foreground: var(--sujian-ink-tertiary);
+
+  --accent: var(--sujian-cinnabar-light);
+  --accent-foreground: var(--sujian-ink-primary);
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--sujian-paper-dark);
+  --input: var(--sujian-paper-dark);
+  --ring: var(--sujian-cinnabar);
+
+  /* 自定义辅助变量 */
+  --bg-primary: var(--sujian-paper-base);
+  --text-primary: var(--sujian-ink-primary);
+  --border-color: var(--sujian-paper-dark);
+}
+
+/* 暗色模式 - Nuxt ColorMode 添加 .dark 类到 html */
+html.dark {
+  /* 素笺色彩 - 暗色 */
+  --sujian-paper-base: #1a1a1a;
+  --sujian-paper-light: #2c2c2c;
+  --sujian-paper-dark: #3d3d3d;
+
+  --sujian-ink-primary: #f7f4ed;
+  --sujian-ink-secondary: #d4d0c8;
+  --sujian-ink-tertiary: #9a9a9a;
+
+  --sujian-cinnabar: #e05a52;
+  --sujian-cinnabar-light: #f6a9a7;
+  --sujian-cyan: #75EDAE;
+
+  --sujian-shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --sujian-shadow-md: 0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.2);
+  --sujian-shadow-lg: 0 12px 24px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.2);
+
+  /* 信笺线 - 暗色 */
+  --sujian-line-color: rgba(247, 244, 237, 0.06);
+
+  /* Reka UI / Nuxt UI 主题变量 - 暗色映射 */
+  --background: var(--sujian-paper-base);
+  --foreground: var(--sujian-ink-primary);
+
+  --card: var(--sujian-paper-light);
+  --card-foreground: var(--sujian-ink-primary);
+
+  --popover: var(--sujian-paper-light);
+  --popover-foreground: var(--sujian-ink-primary);
+
+  --primary: var(--sujian-cinnabar);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--sujian-paper-dark);
+  --secondary-foreground: var(--sujian-ink-primary);
+
+  --muted: var(--sujian-paper-dark);
+  --muted-foreground: var(--sujian-ink-tertiary);
+
+  --accent: var(--sujian-cinnabar-light);
+  --accent-foreground: var(--sujian-ink-primary);
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--sujian-paper-dark);
+  --input: var(--sujian-paper-dark);
+  --ring: var(--sujian-cinnabar);
+}
+
+/* 全局样式 */
+body {
+  background-color: var(--sujian-paper-base);
+  color: var(--sujian-ink-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 字体模式切换 */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* 颗粒感滤镜 */
+.sujian-noise {
+  filter: url(#sujian-noise);
+}
+
+/* 信笺横格线 */
+.sujian-lines {
+  position: relative;
+}
+
+.sujian-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    var(--sujian-line-color) 31px,
+    var(--sujian-line-color) 32px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sujian-lines > * {
+  position: relative;
+  z-index: 1;
 }

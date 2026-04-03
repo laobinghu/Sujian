@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// 模拟文章数据（后续可从 API 获取）
+// 模拟文章数据（实际应从 API 获取）
 const articles = [
   {
     id: 1,
@@ -56,7 +56,7 @@ const articles = [
       </p>
       <div
         class="header-divider"
-        aria-hidden="false"
+        aria-hidden="true"
       />
     </header>
 

@@ -1,0 +1,5 @@
+# Ignore markdown format issues
+*.md
+*.json
+*.config.ts
+*.config.mjs
