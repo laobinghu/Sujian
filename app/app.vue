@@ -104,7 +104,17 @@ const isMobileMenuOpen = ref(false)
       title="导航菜单"
     >
       <template #body>
-        <UVerticalNavigation :items="navItems" />
+        <nav class="mobile-nav">
+          <NuxtLink
+            v-for="item in navItems"
+            :key="item.to"
+            :to="item.to"
+            class="mobile-nav-link"
+            @click="isMobileMenuOpen = false"
+          >
+            {{ item.label }}
+          </NuxtLink>
+        </nav>
       </template>
     </USlideover>
 
@@ -157,5 +167,30 @@ const isMobileMenuOpen = ref(false)
 .layout-enter-from,
 .layout-leave-to {
   opacity: 0;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--sujian-ink-secondary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.mobile-nav-link:hover {
+  background-color: var(--sujian-paper);
+}
+
+.mobile-nav-link.router-link-active {
+  color: var(--sujian-cinnabar);
+  background-color: rgba(211, 66, 60, 0.1);
 }
 </style>
