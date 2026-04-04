@@ -26,9 +26,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: '10'  # 与项目packageManager版本一致
+        run: corepack enable && corepack prepare pnpm@10 --activate
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
