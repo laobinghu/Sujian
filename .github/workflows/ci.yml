@@ -55,12 +55,38 @@ jobs:
           tag_name: "preview-${{ github.ref_name }}-${{ github.run_number }}"
           body: |
             ## 预览版本
+
+            ### 构建信息
             - 分支: `${{ github.ref_name }}`
             - 提交: `${{ github.sha }}`
             - 运行号: `${{ github.run_number }}`
             - 时间: ${{ github.event.head_commit.timestamp }}
 
-            此版本为自动构建的预览版本，仅供测试使用。
+            ### 如何使用构建资产
+
+            1. **下载** sujian-build.zip 文件
+            2. **解压** 到本地目录：
+               ```bash
+               unzip sujian-build.zip -d ./sujian-preview
+               ```
+            3. **运行预览服务器**（需安装 Node.js 20+）：
+               ```bash
+               cd sujian-preview
+               npx serve -s . -p 3000
+               ```
+               或使用其他静态文件服务器：
+               ```bash
+               # 使用 Python
+               python -m http.server 3000
+
+               # 或使用 Node.js http-server
+               npx http-server . -p 3000
+               ```
+
+            4. **访问** http://localhost:3000
+
+            ---
+            > 此版本为自动构建的预览版本，仅供测试使用。
           prerelease: true
           generate_release_notes: false
           files: |
