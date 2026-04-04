@@ -43,9 +43,9 @@ jobs:
         run: |
           mkdir -p release
           cp -r .output/public/* release/
-          # 如果需要，可以添加其他文件
-          # cp package.json release/
-          # cp README.md release/
+          cd release
+          zip -r ../sujian-build.zip .
+          cd ..
 
       - name: Create Preview Release
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}  # 仅在分支推送时创建预览release
@@ -63,7 +63,7 @@ jobs:
           prerelease: true
           generate_release_notes: false
           files: |
-            release/**
+            sujian-build.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +72,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            release/**
+            sujian-build.zip
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
