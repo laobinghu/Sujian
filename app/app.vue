@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import * as locales from '@nuxt/ui/locale'
 
 const { locale } = useI18n()
@@ -45,76 +45,11 @@ useSeoMeta({
   twitterImage: '/og-image.jpg',
   twitterCard: 'summary_large_image'
 })
-
-const navItems = [
-  { label: '首页', to: '/' },
-  { label: '文章', to: '/posts' },
-  { label: '日记', to: '/notes' },
-  { label: '友链', to: '/friends' },
-  { label: '项目', to: '/projects' },
-  { label: '动态', to: '/recently' },
-  { label: '时间线', to: '/timeline' },
-  { label: '一言', to: '/says' },
-]
-
-const isMobileMenuOpen = ref(false)
 </script>
 
 <template>
   <UApp :locale="locales[locale as keyof typeof locales] || locales['zh_cn']">
-    <UHeader>
-      <template #left>
-        <NuxtLink to="/">
-          <SujianLogo class="sujian-logo" />
-        </NuxtLink>
-
-        <SujianNav />
-      </template>
-
-      <template #right>
-        <UColorModeButton />
-
-        <FontSwitcher />
-
-        <UButton
-          icon="i-lucide-menu"
-          variant="ghost"
-          color="neutral"
-          class="md:hidden"
-          aria-label="菜单"
-        />
-      </template>
-    </UHeader>
-
-    <!-- 移动端菜单抽屉 -->
-    <USlideover
-      v-model:open="isMobileMenuOpen"
-      title="导航菜单"
-    >
-      <template #default>
-        <UButton
-          icon="i-lucide-menu"
-          variant="ghost"
-          color="neutral"
-          class="md:hidden"
-          aria-label="菜单"
-        />
-      </template>
-
-      <template #body>
-        <nav class="mobile-nav">
-          <NuxtLink
-            v-for="item in navItems"
-            :key="item.to"
-            :to="item.to"
-            class="mobile-nav-link"
-            @click="isMobileMenuOpen = false"
-          >
-            {{ item.label }}
-          </NuxtLink>
-        </nav>
-      </template>
-    </USlideover>
+    <SujianHeader />
 
     <UMain>
       <NuxtPage />
@@ -165,30 +100,5 @@ const isMobileMenuOpen = ref(false)
 .layout-enter-from,
 .layout-leave-to {
   opacity: 0;
-}
-
-.mobile-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.mobile-nav-link {
-  display: block;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  color: var(--sujian-ink-secondary);
-  text-decoration: none;
-  border-radius: 0.5rem;
-  transition: background-color 0.2s;
-}
-
-.mobile-nav-link:hover {
-  background-color: var(--sujian-paper);
-}
-
-.mobile-nav-link.router-link-active {
-  color: var(--sujian-cinnabar);
-  background-color: rgba(211, 66, 60, 0.1);
 }
 </style>
