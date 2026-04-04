@@ -210,13 +210,7 @@ unzip sujian-build.zip -d ./sujian-preview
 
 # 启动预览服务器（需要 Node.js 20+）
 cd sujian-preview
-npx serve -s . -p 3000
-
-# 或使用 Python
-python -m http.server 3000
-
-# 访问
-open http://localhost:3000
+node server/index.mjs
 ```
 
 ## 🚢 部署
@@ -235,7 +229,7 @@ pnpm build
 pnpm preview
 ```
 
-构建产物 `.output/public` 可直接部署到任何静态托管平台。如需服务端渲染功能，需部署到支持 Node.js 的平台（如 Vercel、Railway、Heroku 等）。
+构建产物 `.output` 可直接部署到任何静态托管平台。如需服务端渲染功能，需部署到支持 Node.js 的平台（如 Vercel、Railway、Heroku 等）。
 
 ## 🏷️ 版本管理
 
