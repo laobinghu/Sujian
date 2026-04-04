@@ -87,12 +87,7 @@ useSeoMeta({
     <main class="page-content">
       <SujianCard>
         <div class="content-wrapper">
-          <!-- eslint-disable vue/no-v-html -->
-          <div
-            class="markdown-body"
-            v-html="page.content"
-          />
-          <!-- eslint-enable vue/no-v-html -->
+          <MarkdownRenderer :content="page.content" />
         </div>
       </SujianCard>
     </main>

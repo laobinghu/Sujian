@@ -134,12 +134,7 @@ useSeoMeta({
           <p class="project-desc">
             {{ project.description }}
           </p>
-          <!-- eslint-disable vue/no-v-html -->
-          <div
-            class="markdown-body"
-            v-html="project.content"
-          />
-          <!-- eslint-enable vue/no-v-html -->
+          <MarkdownRenderer :content="project.content" />
         </div>
       </SujianCard>
     </main>
