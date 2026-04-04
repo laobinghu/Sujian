@@ -17,13 +17,13 @@ export default defineNuxtConfig({
 
   // 页面过渡动画
   app: {
-    head: {
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://cdn.jsdmirror.cn/npm/lxgw-wenkai-webfont@1.1.0/style.css' }
-      ]
-    },
+    // head: {
+    //   link: [
+    //     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    //     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+    //     { rel: 'stylesheet', href: 'https://cdn.jsdmirror.cn/npm/lxgw-wenkai-webfont@1.1.0/style.css' }
+    //   ]
+    // },
     pageTransition: { name: 'page', mode: 'out-in' },
     layoutTransition: { name: 'layout', mode: 'out-in' }
   },
@@ -96,5 +96,16 @@ export default defineNuxtConfig({
     sources: [
       '/api/sitemap-urls'
     ]
+  },
+
+  // Nitro 服务器配置
+  nitro: {
+    // 服务器构建配置
+    serverAssets: [
+      // 可以在这里指定需要复制到 server 目录的静态资源
+    ],
+
+    // 确保生成所有必要的入口文件
+    preset: 'node-server',
   }
 })
