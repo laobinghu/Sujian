@@ -9,10 +9,12 @@ const logoSvg = `
 </script>
 
 <template>
+  <!-- eslint-disable vue/no-v-html -->
   <div
     class="sujian-logo"
     v-html="logoSvg"
   />
+  <!-- eslint-enable vue/no-v-html -->
 </template>
 
 <style scoped>
