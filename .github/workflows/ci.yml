@@ -42,7 +42,7 @@ jobs:
       - name: Prepare release assets
         run: |
           mkdir -p release
-          cp -r .output/public/* release/
+          cp -r .output/* release/
           cd release
           zip -r ../sujian-build.zip .
           cd ..
@@ -67,20 +67,12 @@ jobs:
             1. **下载** sujian-build.zip 文件
             2. **解压** 到本地目录：
                ```bash
-               unzip sujian-build.zip -d ./sujian-preview
+               unzip sujian-build.zip -d ./sujian
                ```
             3. **运行预览服务器**（需安装 Node.js 20+）：
                ```bash
-               cd sujian-preview
-               npx serve -s . -p 3000
-               ```
-               或使用其他静态文件服务器：
-               ```bash
-               # 使用 Python
-               python -m http.server 3000
-
-               # 或使用 Node.js http-server
-               npx http-server . -p 3000
+               cd sujian/server
+               node index.mjs
                ```
 
             4. **访问** http://localhost:3000
