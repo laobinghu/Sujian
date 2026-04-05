@@ -78,6 +78,7 @@ export default defineNuxtConfig({
     },
     logLevel: 'error',
     build: {
+      sourcemap: false,
       chunkSizeWarningLimit: 1000,
       rollupOptions: {
         onwarn(warning, warn) {
