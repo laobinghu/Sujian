@@ -11,7 +11,7 @@ pnpm lint             # ESLint on entire codebase
 pnpm lint --fix       # Auto-fix linting issues
 pnpm lint -- <file>   # Lint single file (e.g. pnpm lint -- app/pages/index.vue)
 pnpm typecheck        # TypeScript type checking via nuxt typecheck
-pnpm install          # Install dependencies
+pnpm install          # Install dependencies (auto-runs nuxt prepare)
 ```
 
 **Testing**: No test framework configured. To add: `pnpm add -D vitest @vue/test-utils happy-dom`
@@ -23,9 +23,9 @@ Run single test: `pnpm vitest run -- MyComponent.test.ts`
 - **UI**: Nuxt UI v4 (components only, custom styling)
 - **Styling**: Tailwind CSS v4 + `--sujian-*` CSS variables
 - **Language**: TypeScript (strict mode)
-- **Package Manager**: pnpm (v10+)
-- **Linting**: ESLint with @nuxt/eslint
-- **Other**: @nuxtjs/seo, @nuxt/image, @vueuse/nuxt, @mx-space/api-client, @nuxtjs/i18n (zh-cn, no_prefix)
+- **Package Manager**: pnpm@10.33.0
+- **Linting**: ESLint 9 (flat config) via @nuxt/eslint
+- **Other**: @nuxtjs/seo, @nuxt/image, @nuxt/scripts, @vueuse/nuxt, @mx-space/api-client, @nuxtjs/i18n (zh-cn, no_prefix), markdown-it
 
 ## Code Style
 
@@ -95,6 +95,12 @@ import { useMyStore } from '~/stores/myStore'
 - Throw typed errors, provide user-friendly Chinese messages
 - Avoid `console.error` in production
 
+### ESLint Rules
+
+- Stylistic: `commaDangle: 'never'`, `braceStyle: '1tbs'`
+- Flat config extends `.nuxt/eslint.config.mjs`
+- Ignores: `*.md`, `*.json`, `*.config.ts`, `*.config.mjs`, `.nuxt`, `dist`
+
 ### Sujian Theme Specifics
 
 - **Noise Effect**: `filter: url(#sujian-noise)` — bg: 0.03, card: 0.08, content: 0.15
@@ -116,6 +122,7 @@ app/
 ├── stores/                # Pinia stores
 ├── types/                 # TypeScript type definitions
 └── app.vue                # Root component
+server/                    # Server routes & API endpoints
 ```
 
 ## Git & Commits
@@ -126,6 +133,8 @@ app/
 ## Important Notes
 
 1. Chinese-inspired **Sujian** (素笺) design system — follow `PLAN.md`
-2. Font: 霞鹜文楷 (LxgwWenkai) + 系统黑体 fallback，via `localStorage` key `sujian-font-pref`
+2. Font: 霞鹜文楷 (LxgwWenkai) + 系统黑体 fallback, via `localStorage` key `sujian-font-pref`
 3. Performance target: Lighthouse Performance > 90
-4. ESLint config: stylistic with `commaDangle: 'never'`, `braceStyle: '1tbs'`
+4. Page/layout transitions: `out-in` mode
+5. Nuxt UI theme default: `neutral` color, `md` size, transitions enabled
+6. No Cursor rules (`.cursor/rules/`, `.cursorrules`) or Copilot rules (`.github/copilot-instructions.md`) exist
