@@ -1,53 +1,37 @@
-import { createClient, allControllers, type IRequestAdapter } from '@mx-space/api-client'
+import {
+  createClient,
+  PostController,
+  NoteController,
+  AggregateController,
+  CategoryController,
+  RecentlyController,
+  LinkController,
+  ProjectController,
+  SayController,
+  PageController,
+  SearchController,
+  type HTTPClient
+} from '@mx-space/api-client'
+import { fetchAdaptor } from '@mx-space/api-client/dist/adaptors/fetch'
+import type { MXSpaceClient } from '~/types/mx-space'
 
-const fetchAdaptor: IRequestAdapter<typeof fetch> = {
-  get default() {
-    return fetch
-  },
-  async delete(url, options) {
-    const response = await fetch(url, { ...options, method: 'DELETE' })
-    const data = await response.json()
-    if (response.ok) return { data }
-    return Promise.reject({ data })
-  },
-  async get(url, options) {
-    const response = await fetch(url, { ...options, method: 'GET' })
-    const data = await response.json()
-    if (response.ok) return { data }
-    return Promise.reject({ data })
-  },
-  async patch(url, options) {
-    const response = await fetch(url, { ...options, method: 'PATCH', body: JSON.stringify(options?.data) })
-    const data = await response.json()
-    if (response.ok) return { data }
-    return Promise.reject({ data })
-  },
-  async post(url, options) {
-    const response = await fetch(url, { ...options, method: 'POST', body: JSON.stringify(options?.data) })
-    const data = await response.json()
-    if (response.ok) return { data }
-    return Promise.reject({ data })
-  },
-  async put(url, options) {
-    const response = await fetch(url, { ...options, method: 'PUT', body: JSON.stringify(options?.data) })
-    const data = await response.json()
-    if (response.ok) return { data }
-    return Promise.reject({ data })
+export default defineNuxtPlugin((nuxtApp) => {
+  console.log('[mx-space] Plugin executing')
+  
+  // 暂时提供模拟客户端进行测试
+  const mockClient: any = {
+    post: { getList: async () => ({ list: [], total: 0 }) },
+    note: { getList: async () => ({ list: [], total: 0 }) },
+    aggregate: { getAggregateData: async () => ({}) },
+    category: { getList: async () => ({}) },
+    recently: { getAll: async () => ({}) },
+    link: { getLinks: async () => ({ list: [] }) },
+    project: { getList: async () => ({ list: [], total: 0 }) },
+    say: { getList: async () => ({ list: [], total: 0 }) },
+    page: { getList: async () => ({ list: [], total: 0 }) },
+    search: { search: async () => ({}) }
   }
-}
-
-export type MXSpaceClient = ReturnType<typeof createClient<typeof fetchAdaptor>>
-
-const API_BASE_URL = 'https://mx1.647382.xyz/v2'
-
-export default defineNuxtPlugin(() => {
-  const client = createClient(fetchAdaptor)(API_BASE_URL)
-
-  client.injectControllers(allControllers)
-
-  return {
-    provide: {
-      mx: client
-    }
-  }
+  
+  nuxtApp.provide('mx-space-client', mockClient)
+  console.log('[mx-space] Mock client provided')
 })

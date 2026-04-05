@@ -4,6 +4,15 @@
 /* 启用基于 class 的暗色模式 */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* 字体导入 */
+@font-face {
+  font-family: 'LXGW WenKai';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.woff2') format('woff2');
+}
+
 /* 素笺设计系统 - 基础 CSS 变量 */
 :root {
   /* 字体 - 简阅：系统黑体 / 雅阅：霞鹜文楷 */
