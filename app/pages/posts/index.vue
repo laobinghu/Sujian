@@ -1,47 +1,17 @@
 <script setup lang="ts">
-// 模拟文章数据（实际应从 API 获取）
-const articles = [
-  {
-    id: 1,
-    title: '素笺主题设计理念',
-    excerpt: '探索中式美学在现代Web设计中的运用，以"素笺"为载体，传承传统文化精髓。',
-    date: '2026-01-15',
-    readTime: '5 min',
-    tags: ['设计', '主题', '中式'],
-    category: 'design',
-    slug: 'sujian-design-philosophy'
-  },
-  {
-    id: 2,
-    title: 'Nuxt 4 开发实践',
-    excerpt: '基于 Nuxt 4 构建高性能网站的最佳实践，包括性能优化、SEO配置等。',
-    date: '2026-01-10',
-    readTime: '8 min',
-    tags: ['Nuxt', 'Vue', '前端'],
-    category: 'frontend',
-    slug: 'nuxt-4-practices'
-  },
-  {
-    id: 3,
-    title: 'Mix Space Core 前端架构',
-    excerpt: '深入解析 Mix Space Core 的前端架构设计，了解模块化和组件化实践。',
-    date: '2026-01-05',
-    readTime: '12 min',
-    tags: ['Mix Space', '架构', 'TypeScript'],
-    category: 'architecture',
-    slug: 'mix-space-core-architecture'
-  },
-  {
-    id: 4,
-    title: 'CSS 变量与主题系统',
-    excerpt: '使用 CSS 自定义属性构建灵活的主题系统，实现一键切换配色和字体。',
-    date: '2025-12-28',
-    readTime: '6 min',
-    tags: ['CSS', '主题', '设计系统'],
-    category: 'design',
-    slug: 'css-variables-theme-system'
-  }
-]
+import { ref, computed } from 'vue'
+import { useArticles } from '~/composables/useArticles'
+
+const page = ref(1)
+const pageSize = 10
+const { getList } = useArticles()
+
+const { data: articlesData, pending: _pending, error: _error } = await useAsyncData(
+  `articles-page-${page.value}`,
+  () => getList(page.value, pageSize)
+)
+
+const articles = computed(() => articlesData.value?.list || [])
 </script>
 
 <template>
